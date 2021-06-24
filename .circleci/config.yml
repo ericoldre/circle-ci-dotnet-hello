@@ -26,6 +26,7 @@ jobs:
             echo "RUNNING JOB: ${CIRCLE_JOB}"
             echo "JOB PARALLELISM: ${CIRCLE_NODE_TOTAL}"
             echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
+            echo "TAG: ${TAG}"
       - run:
           name: list files
           working_directory: ~/project/
@@ -62,4 +63,5 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   sample: 
     jobs:
+      - build-and-test
       - build-image
