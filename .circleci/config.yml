@@ -41,9 +41,10 @@ jobs:
           name: Load archived Docker image
           command: docker load -i /tmp/workspace/image.tar
       - run:
-          name: asdf
-          working_directory: ~/project/
-          command: echo "hello world"
+          name: Publish Docker Image to Docker Hub
+          command: |
+            echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push $IMAGE_NAME:latest
   build-image-on-machine:  
     machine: true
     steps:
