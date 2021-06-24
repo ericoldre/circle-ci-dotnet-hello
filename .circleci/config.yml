@@ -42,6 +42,17 @@ jobs:
           name: Run tests
           command: |
             dotnet build hello.sln
+  build-image:  
+    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
+    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
+    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: docker build
+          working_directory: ~/project/
+          command: docker build -f hello\Dockerfile .       
             
 
 workflows:
@@ -51,4 +62,4 @@ workflows:
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   sample: 
     jobs:
-      - build-and-test
+      - build-image
