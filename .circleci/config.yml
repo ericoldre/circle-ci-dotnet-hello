@@ -20,11 +20,9 @@ jobs:
           name: Run tests
           command: |
             dotnet build hello.sln
-  build-image:  
-    # These next lines define a Docker executor: https://circleci.com/docs/2.0/executor-types/
-    # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
-    # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
-    machine: true
+  build-image:
+    docker:
+      - image: circleci/buildpack-deps:stretch
     steps:
       - checkout
       - setup_remote_docker
@@ -32,6 +30,15 @@ jobs:
           name: docker build
           working_directory: ~/project/
           command: docker build -f hello/Dockerfile .
+  build-image-on-maching:  
+    machine: true
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: docker build
+          working_directory: ~/project/
+          command: docker build -f hello/Dockerfile .          
   publish-dockerhub:  
     machine: true
     steps:
