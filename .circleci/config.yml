@@ -64,6 +64,7 @@ jobs:
           name: Show some of the CircleCI runtime env vars
           working_directory: ~/project/
           command: |-
+            echo "DOCKERHUB_USERNAME: ${DOCKERHUB_USERNAME}"
             echo "TRIGGERER: ${CIRCLE_USERNAME}"
             echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
             echo "BUILD_URL: ${CIRCLE_BUILD_URL}"
@@ -92,7 +93,7 @@ workflows:
   sample: 
     jobs:
       - echo-vars
-      - dotnet-build
+      #- dotnet-build
       - build-image
       - publish-dockerhub:
           requires:
