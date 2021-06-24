@@ -30,7 +30,15 @@ jobs:
       - run:
           name: docker build
           working_directory: ~/project/
-          command: docker build -f hello/Dockerfile .       
+          command: docker build -f hello/Dockerfile .
+  publish-dockerhub:  
+    machine: true
+    steps:
+      - checkout
+      - run:
+          name: asdf
+          working_directory: ~/project/
+          command: echo "hello world"             
   echo-vars:
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:5.0
@@ -71,3 +79,9 @@ workflows:
       - echo-vars
       - dotnet-build
       - build-image
+      - publish-dockerhub:
+          requires:
+          - build-image
+          filters:
+            branches:
+              only: main
