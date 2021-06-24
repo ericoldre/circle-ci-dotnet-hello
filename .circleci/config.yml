@@ -52,7 +52,7 @@ jobs:
       - run:
           name: docker build
           working_directory: ~/project/
-          command: docker build -f hello\Dockerfile .       
+          command: docker build -f hello/Dockerfile .       
             
 
 workflows:
