@@ -17,7 +17,7 @@ jobs:
       # Then simply use the dotnet container as you'd expect and run your tests
       - run:
           name: Show some of the CircleCI runtime env vars
-          working_directory: ~/
+          working_directory: ~/project/
           command: |-
             echo "TRIGGERER: ${CIRCLE_USERNAME}"
             echo "BUILD_NUMBER: ${CIRCLE_BUILD_NUM}"
@@ -28,17 +28,17 @@ jobs:
             echo "CIRCLE_REPOSITORY_URL: ${CIRCLE_REPOSITORY_URL}"
       - run:
           name: list files
-          working_directory: ~/
+          working_directory: ~/project/
           command: |-
             ls
       - run:
           name: working dir
-          working_directory: ~/
+          working_directory: ~/project/
           command: |-
             echo $PWD            
       - run:
           # Update this line with the directory that contains your tests project file
-          working_directory: ~/ # ~/project/App.Tests
+          working_directory: ~/project/ # ~/project/App.Tests
           name: Run tests
           command: |
             dotnet build hello.sln
